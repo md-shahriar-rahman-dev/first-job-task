@@ -4,8 +4,11 @@ import { readItems } from '@/lib/data';
 // GET single item by ID
 export async function GET(request, { params }) {
   try {
+    // Await params in Next.js 15/16 App Router
+    const { id } = await params;
     const items = readItems();
-    const item = items.find(i => i.id === parseInt(params.id));
+    const itemId = parseInt(id);
+    const item = items.find(i => i.id === itemId);
     
     if (!item) {
       return NextResponse.json(

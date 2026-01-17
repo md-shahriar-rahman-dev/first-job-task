@@ -22,20 +22,25 @@ export default function ItemDetailsPage() {
   const fetchItem = async (id) => {
     try {
       setLoading(true);
+      setError('');
       const response = await fetch(`/api/items/${id}`);
+      const data = await response.json();
+      
       if (!response.ok) {
         if (response.status === 404) {
-          setError('Item not found');
+          setError(data.error || 'Item not found');
         } else {
-          throw new Error('Failed to fetch item');
+          setError(data.error || 'Failed to fetch item');
         }
+        setItem(null);
         return;
       }
-      const data = await response.json();
+      
       setItem(data);
     } catch (err) {
       setError('Failed to load item details. Please try refreshing the page.');
       console.error('Error fetching item:', err);
+      setItem(null);
     } finally {
       setLoading(false);
     }

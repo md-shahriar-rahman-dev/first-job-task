@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import HeroSlider from '@/components/HeroSlider';
 import { ChevronRight, Truck, Shield, Star, Sparkles } from 'lucide-react';
 
 export default function Home() {
@@ -79,84 +80,8 @@ export default function Home() {
     <>
       <Navbar />
       
-      {/* Enhanced Hero Section */}
-      <section className="pt-16 min-h-screen relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900 text-white">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center lg:text-left lg:flex lg:items-center lg:justify-between"
-          >
-            <div className="lg:w-1/2">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm mb-6">
-                <Sparkles className="w-4 h-4 mr-2" />
-                <span className="text-sm font-medium">Over 10,000 Happy Customers</span>
-              </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                Welcome to{' '}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300">
-                  ShopHub
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-2xl">
-                Discover amazing products at unbeatable prices with our curated collection
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 lg:justify-start justify-center">
-                <Link
-                  href="/items"
-                  className="group relative inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 text-lg shadow-lg"
-                >
-                  <span>Browse Items</span>
-                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  href="/login"
-                  className="group relative inline-flex items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 text-lg"
-                >
-                  <span>Get Started</span>
-                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform opacity-0 group-hover:opacity-100" />
-                </Link>
-              </div>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="lg:w-1/2 mt-12 lg:mt-0"
-            >
-              <div className="relative mx-auto max-w-md">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-2xl blur opacity-30"></div>
-                <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                  <div className="grid grid-cols-2 gap-4">
-                    {['🔥 Hot Deals', '⭐ Top Rated', '🚀 New Arrivals', '💝 Best Sellers'].map((tag, idx) => (
-                      <div key={idx} className="bg-white/10 rounded-lg p-3 text-center backdrop-blur-sm">
-                        <span className="text-sm font-medium">{tag}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-blue-100">Discounts up to</span>
-                      <span className="text-2xl font-bold text-cyan-300">70% OFF</span>
-                    </div>
-                    <div className="w-full bg-white/20 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-cyan-400 to-blue-400 h-2 rounded-full w-3/4"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Hero Banner Slider */}
+      <HeroSlider />
 
       {/* Enhanced Features Section */}
       <section className="py-20 bg-white relative">
