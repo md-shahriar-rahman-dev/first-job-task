@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import { Toaster } from "react-hot-toast"; // ✅ import Toaster
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,17 +15,23 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "ShopHub - Your One-Stop Shopping Destination",
-  description: "Discover amazing products at unbeatable prices. Browse our wide collection of electronics, fashion, home & kitchen items, and more.",
+  description:
+    "Discover amazing products at unbeatable prices. Browse our wide collection of electronics, fashion, home & kitchen items, and more.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           {children}
+          <Toaster
+            position="top-right" // top-right, bottom-left, etc
+            toastOptions={{
+              duration: 3000,
+              style: { fontFamily: "var(--font-geist-sans)" },
+            }}
+          />
         </Providers>
       </body>
     </html>
