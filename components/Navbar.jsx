@@ -62,7 +62,7 @@ export default function Navbar() {
       toast.success('You have successfully logged out!'); // ✅ Show toast
 
       // Redirect
-      if (pathname === '/' || pathname === '/login') {
+      if (pathname === '/' || pathname === '/login/client/client') {
         window.location.reload();
       } else {
         router.push('/');
@@ -142,7 +142,7 @@ export default function Navbar() {
               </button>
             ) : (
               <Link
-                href="/login"
+                href="/login/client"
                 className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors shadow-sm hover:shadow"
               >
                 Login
@@ -203,7 +203,7 @@ export default function Navbar() {
                 </button>
               ) : (
                 <Link
-                  href="/login"
+                  href="/login/client"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg transition-colors text-center"
                 >
