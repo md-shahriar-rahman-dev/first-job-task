@@ -3,19 +3,27 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 import Cookies from 'js-cookie';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    // Check both cookie-based and NextAuth session
     const token = Cookies.get('auth-token');
-    setIsAuthenticated(token === 'authenticated');
-  }, [pathname]);
+    setIsAuthenticated(token === 'authenticated' || !!session);
+  }, [pathname, session]);
 
   const handleLogout = async () => {
     try {
+      // If using NextAuth, sign out from NextAuth
+      if (session) {
+        await signOut({ redirect: false });
+      }
+      // Also clear cookie-based auth
       await fetch('/api/auth/logout', { method: 'POST' });
       Cookies.remove('auth-token');
       setIsAuthenticated(false);

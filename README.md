@@ -36,7 +36,10 @@ Authentication is cookie-based. Protected routes automatically redirect to `/log
 
 ### Public Routes
 - `/` – Landing page with 7 sections (Hero, Features, Categories, How It Works, Testimonials, Stats, CTA) + Navbar/Footer
-- `/login` – Mock login form; sets cookie on success and redirects to items page
+- `/login` – Login page with:
+  - Mock login form (email/password)
+  - Google OAuth login button (if configured)
+  - Sets cookie/session on success and redirects to items page
 - `/items` – Public items list page (fetches from Next.js API)
 - `/items/[id]` – Public item details page
 
@@ -69,10 +72,12 @@ Data is stored in `lib/data/items.json` (auto-initialized with sample items if f
 - Footer component
 
 ✅ **Authentication**
-- Mock login using hardcoded email & password
-- Credentials stored in HTTP-only cookies
+- **Primary:** Mock login using hardcoded email & password
+- **Optional (Highly Recommended):** NextAuth.js with Google OAuth login
+- Credentials stored in HTTP-only cookies (mock login) or NextAuth sessions
 - Route protection via Next.js middleware
 - Automatic redirect to login for protected routes
+- Support for both credential and social (Google) authentication
 
 ✅ **Item List Page**
 - Publicly accessible
@@ -95,10 +100,12 @@ Data is stored in `lib/data/items.json` (auto-initialized with sample items if f
 
 ## Tech Stack
 
-- **Next.js 16** (App Router)
+- **Next.js 16** (App Router) ✅
+- **API for fetching and managing product data** (Next.js API routes with JSON storage) ✅
+- **Tailwind CSS v4** (styling solution) ✅
+- **NextAuth.js v4** (authentication with Google OAuth support)
 - **React 19**
 - **JavaScript** (JSX)
-- **Tailwind CSS v4**
 - **react-hot-toast** (for notifications)
 - **js-cookie** (for client-side cookie management)
 
@@ -172,7 +179,31 @@ This project is fully compatible with Vercel deployment:
 
 ## Environment Variables
 
-No environment variables required! The app works out of the box.
+For basic functionality, no environment variables are required. However, to use **Google Login** (NextAuth.js), create a `.env.local` file in the root directory:
+
+```env
+# NextAuth Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key-change-this-in-production
+
+# Google OAuth Credentials (Optional - for Google Login)
+GOOGLE_CLIENT_ID=your-google-client-id-here
+GOOGLE_CLIENT_SECRET=your-google-client-secret-here
+```
+
+**To get Google OAuth credentials:**
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing
+3. Enable Google+ API
+4. Go to **Credentials** > **Create Credentials** > **OAuth 2.0 Client ID**
+5. Add authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
+6. Copy Client ID and Client Secret to your `.env.local` file
+
+**Note:** See `env.example.txt` for a detailed setup guide.
+
+**For Vercel deployment:**
+- Add these environment variables in your Vercel project settings
+- Update `NEXTAUTH_URL` to your production URL (e.g., `https://your-app.vercel.app`)
 
 ---
 
